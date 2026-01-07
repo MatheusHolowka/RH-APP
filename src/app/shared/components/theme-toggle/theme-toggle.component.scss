@@ -1,0 +1,145 @@
+:host {
+  display: flex; // Permite que o componente se alinhe
+  align-items: center; // Centraliza verticalmente no header
+  margin-right: 1rem; // Adiciona um espaço à direita (antes do avatar)
+}
+.theme-toggle-container {
+  width: 120px;
+  height: 50px;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s ease-in-out;
+}
+
+.toggle-button {
+  width: 100%;
+  height: 100%;
+  border-radius: 25px;
+  position: relative;
+  transition: background 0.3s ease-in-out;
+
+  /*
+   * ESTADO PADRÃO = MODO CLARO (SOL)
+   */
+  background: linear-gradient(to right, #9ddafb, #8bc9f8); // Fundo diurno
+
+  .circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    transition: all 0.3s ease-in-out;
+
+    // Estilo Sol
+    transform: translateX(70px); // Sol à direita
+    background: linear-gradient(
+      145deg,
+      #fadc7f,
+      #f7cd5a
+    ); // Degrade para o sol
+    box-shadow: 2px 2px 5px rgba(255, 215, 0, 0.5),
+      inset -2px -2px 5px #e0b842;
+
+    // **NOVAS LINHAS**: Remove os pseudo-elementos para o sol
+    &::before, &::after {
+        content: none;
+    }
+  }
+
+  .stars {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    opacity: 0; // Estrelas escondidas no modo claro
+    transition: opacity 0.3s ease-in-out;
+
+    .star {
+      background-color: #fff;
+      border-radius: 50%;
+      position: absolute;
+      animation: twinkle 2s infinite ease-in-out;
+
+      // Posição das estrelas no modo NOTURNO
+      &:nth-child(1) { width: 4px; height: 4px; top: 10px; left: 60px; }
+      &:nth-child(2) { width: 3px; height: 3px; top: 25px; left: 80px; }
+      &:nth-child(3) { width: 5px; height: 5px; top: 35px; left: 70px; }
+    }
+  }
+
+  .clouds {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    opacity: 1; // Nuvens visíveis no modo claro
+    transition: opacity 0.3s ease-in-out;
+
+    .cloud {
+      background-color: #fff;
+      border-radius: 50%;
+      position: absolute;
+      opacity: 0.9;
+
+      // Posição das nuvens no modo DIURNO
+      &:nth-child(1) { width: 25px; height: 25px; top: 15px; left: 10px; }
+      &:nth-child(2) { width: 35px; height: 35px; top: 8px; left: 25px; }
+      &:nth-child(3) { width: 20px; height: 20px; top: 20px; left: 40px; }
+    }
+  }
+
+  /*
+   * ESTADO MODIFICADO = MODO ESCURO (LUA)
+   * Quando a classe .dark-mode é adicionada
+   */
+  &.dark-mode {
+    background: linear-gradient(to right, #4a4d52, #3b3d42); // Fundo noturno
+
+    .circle {
+      transform: translateX(5px); // Lua à esquerda
+      background: #f0f0f0; 
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3),
+        inset -2px -2px 5px #d1d1d1;
+
+      // **NOVAS LINHAS**: Detalhes da lua re-adicionados
+      &::before {
+        content: '';
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: #d8d8d8;
+        top: 10px;
+        left: 8px;
+      }
+      &::after {
+        content: '';
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: #d8d8d8;
+        bottom: 7px;
+        right: 10px;
+      }
+    }
+
+    .stars { opacity: 1; } // Estrelas visíveis
+    .clouds { opacity: 0; } // Nuvens escondidas
+  }
+}
+
+// Animação das estrelas
+@keyframes twinkle {
+  0%, 100% { opacity: 0.8; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}

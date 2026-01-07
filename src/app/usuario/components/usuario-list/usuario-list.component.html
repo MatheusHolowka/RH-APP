@@ -1,0 +1,133 @@
+<div class="dashboard-header">
+  <h1>Gerenciar Usuários</h1>
+  <p>Adicione e remova membros da sua equipe.</p>
+</div>
+
+<div class="card-neu">
+  <h2>Adicionar Novo Membro</h2>
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Nome</label>
+        <input type="text" formControlName="nome" placeholder="Nome do funcionário" />
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" formControlName="email" placeholder="email@empresa.com" />
+      </div>
+
+      <div class="form-group">
+        <label>Senha Inicial</label>
+        <input type="text" formControlName="senha" placeholder="Mínimo 6 caracteres" />
+      </div>
+
+      <div class="form-group">
+        <label>Permissão</label>
+        <select formControlName="role">
+          <option value="MEMBRO">Membro (Padrão)</option>
+          <option value="ADMIN_TENANT">Administrador</option>
+        </select>
+      </div>
+    </div>
+
+    @if (errorMsg()) {
+    <div class="api-error">{{ errorMsg() }}</div>
+    }
+
+    <button type="submit" [disabled]="userForm.invalid">Criar Usuário</button>
+  </form>
+</div>
+
+<div class="card-neu list-card">
+  <h2>Equipe Atual</h2>
+
+  @if (isLoading()) {
+  <p>Carregando...</p>
+  } @if (!isLoading() && usuarios().length === 0) {
+  <p>Nenhum usuário encontrado além de você.</p>
+  } @if (!isLoading() && usuarios().length > 0) {
+  <table class="template-table">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Permissão</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (user of usuarios(); track user.id) {
+      <tr>
+        <td>{{ user.nome }}</td>
+        <td>{{ user.email }}</td>
+        <td>
+          <span class="badge" [class.admin]="user.role === 'ADMIN_TENANT'">
+            {{ user.role === 'ADMIN_TENANT' ? 'Admin' : 'Membro' }}
+          </span>
+        </td>
+        <td class="actions-cell">
+          <button class="btn-action" (click)="openAssignModal(user.id)">Iniciar Onboarding</button>
+
+          <button class="btn-delete" (click)="onDelete(user.id)">Remover</button>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+  }
+</div>
+
+@if (showModal()) {
+<div class="modal-backdrop">
+  <div class="modal-content card-neu">
+    <h2>Selecionar Template</h2>
+    <p>Escolha qual processo iniciar para este usuário.</p>
+
+    <div class="form-group">
+      <label>Template de Checklist</label>
+
+      <div class="custom-select-container">
+        <div class="select-trigger" [class.active]="isDropdownOpen()" (click)="toggleDropdown()">
+          <span>{{ selectedTemplateLabel }}</span>
+          <svg
+            class="arrow"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+
+        @if (isDropdownOpen()) {
+        <ul class="select-options">
+          <li (click)="selectTemplate('')" class="option disabled">Selecione um modelo...</li>
+
+          @for (t of templates(); track t.id) {
+          <li
+            (click)="selectTemplate(t.id)"
+            class="option"
+            [class.selected]="selectedTemplateId() === t.id"
+          >
+            {{ t.titulo }}
+          </li>
+          }
+        </ul>
+        }
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn-cancel" (click)="showModal.set(false)">Cancelar</button>
+      <button (click)="assignProcess()" [disabled]="!selectedTemplateId()">Iniciar Processo</button>
+    </div>
+  </div>
+</div>
+}

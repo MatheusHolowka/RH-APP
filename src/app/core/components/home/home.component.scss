@@ -1,0 +1,83 @@
+// Removemos todos os estilos antigos do .home-container
+
+.dashboard-header {
+  margin-bottom: 2rem; // Espaçamento abaixo do título
+  
+  h1 {
+    color: var(--black);
+    font-size: 2.5rem; // Fonte maior para o título da página
+    font-weight: 700;
+  }
+  
+  p {
+    color: var(--gray); // Cor de subtítulo
+    font-size: 1.2rem;
+  }
+}
+
+// Estilo para o nosso card de placeholder
+.dashboard-content-placeholder {
+  padding: 3rem 2rem; // Mais espaço interno
+  text-align: center;
+  border-radius: 8px;
+  
+  // Reutiliza o estilo neuromórfico
+  background-color: var(--neu-1);
+  box-shadow: 10px 10px 10px var(--neu-2),
+              -10px -10px 10px var(--white);
+  color: var(--gray);
+  
+  p {
+    font-size: 1rem;
+  }
+}
+
+.processo-list {
+  display: grid;
+  // Cria 3 colunas, se couber. Mínimo de 300px por card.
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem; // Espaçamento entre os cards
+}
+
+// O card individual
+.processo-card {
+  padding: 1.5rem;
+  border-radius: 8px;
+  background-color: var(--neu-1);
+  box-shadow: 10px 10px 10px var(--neu-2),
+              -10px -10px 10px var(--white);
+  
+  display: flex;
+  justify-content: space-between; // Título de um lado, status do outro
+  align-items: center;
+}
+
+.processo-title {
+  color: var(--black);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+// Estilo para a "tag" de status
+.processo-status {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+
+  // Cores baseadas no status (do backend)
+  &.pendente {
+    background-color: #f0ad4e;
+    color: #fff;
+  }
+  &.em_andamento {
+    background-color: #0275d8;
+    color: #fff;
+  }
+  &.concluido {
+    background-color: #5cb85c;
+    color: #fff;
+  }
+}

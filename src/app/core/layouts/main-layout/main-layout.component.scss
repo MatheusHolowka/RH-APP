@@ -1,0 +1,142 @@
+/* :host é o <app-main-layout> */
+:host {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+/* 1. O Menu Lateral (Sidebar) */
+.sidebar {
+  width: 250px; // Largura da sidebar
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: var(--neu-1);
+  box-shadow: 4px 0px 10px var(--neu-2);
+  transition: margin-left 0.3s ease-in-out;
+  z-index: 1000;
+
+  &.sidebar-closed {
+    margin-left: -250px; // Esconde a sidebar
+  }
+}
+
+.sidebar-brand {
+  padding: 1.5rem 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--black);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.sidebar-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-item {
+  .nav-link {
+    display: block;
+    padding: 1rem 1.5rem;
+    color: var(--gray);
+    text-decoration: none;
+    transition: background-color 0.2s;
+    white-space: nowrap;
+
+    &:hover {
+      background-color: var(--neu-2);
+      color: var(--black);
+    }
+  }
+}
+
+/* 2. O Conteúdo Principal (Main) */
+.main-content {
+  flex-grow: 1;
+  // "Empurra" o conteúdo para a direita
+  margin-left: 250px; 
+  transition: margin-left 0.3s ease-in-out;
+  min-width: 0; // Corrige bugs de flexbox
+  background-color: var(--cui-body-bg, var(--neu-2)); // Fundo do conteúdo
+
+  &.sidebar-closed {
+    margin-left: 0; // Conteúdo ocupa a tela toda
+  }
+}
+
+/* 3. O Header (Barra do Topo) */
+.header {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  padding: 0 1.5rem;
+  background-color: var(--neu-1);
+  box-shadow: 0 4px 10px var(--neu-2);
+}
+
+.header-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  
+  svg {
+    stroke: var(--black); // Cor do ícone
+  }
+}
+
+.header-spacer {
+  flex-grow: 1; // Empurra o resto para a direita
+}
+
+/* 4. O Menu do Usuário (Avatar e Logout) */
+.user-menu {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  // O dropdown (escondido por padrão)
+  .user-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%; // Abaixo do header
+    right: 0;
+    min-width: 160px;
+    background-color: var(--neu-1);
+    box-shadow: 0 8px 16px var(--neu-2);
+    border-radius: 4px;
+    z-index: 1100;
+
+    a {
+      display: block;
+      padding: 12px 16px;
+      color: var(--gray);
+      text-decoration: none;
+      cursor: pointer;
+
+      &:hover {
+        background-color: var(--neu-2);
+        color: var(--black);
+      }
+    }
+  }
+
+  // Mostra o dropdown no hover
+  &:hover .user-dropdown {
+    display: block;
+  }
+}
+
+/* 5. A Área de Conteúdo (Body) */
+.content-body {
+  padding: 1.5rem;
+}

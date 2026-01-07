@@ -1,0 +1,75 @@
+@if (template()) {
+  <div class="dashboard-header">
+    <h1>{{ template().titulo }}</h1>
+    <p>{{ template().descricao || 'Adicione tarefas ao seu template.' }}</p>
+    <a routerLink="/templates" class="back-link">&larr; Voltar para todos os templates</a>
+  </div>
+} @else {
+  <div class="dashboard-header">
+    <h1>Carregando...</h1>
+  </div>
+}
+
+<div class="card-neu">
+  <h2>Adicionar Nova Tarefa</h2>
+  <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+    
+    <div class="form-grid">
+      <div class="form-group span-2">
+        <label for="tituloTarefa">Título da Tarefa *</label>
+        <input id="tituloTarefa" type="text" formControlName="tituloTarefa" placeholder="Ex: Configurar e-mail">
+      </div>
+      
+      <div class="form-group">
+        <label for="ordem">Ordem *</label>
+        <input id="ordem" type="number" formControlName="ordem">
+      </div>
+      
+      <div class="form-group span-3">
+        <label for="descricao">Descrição (Opcional)</label>
+        <input id="descricao" type="text" formControlName="descricao" placeholder="Instruções para esta tarefa...">
+      </div>
+    </div>
+    
+    @if (createError()) {
+      <div class="api-error">{{ createError() }}</div>
+    }
+
+    <button type="submit" [disabled]="itemForm.invalid">Salvar Tarefa</button>
+  </form>
+</div>
+
+<div class="card-neu list-card">
+  <h2>Tarefas do Template</h2>
+
+  @if (isLoading()) { <p>Carregando...</p> }
+
+  @if (!isLoading() && items().length === 0) {
+    <p>Nenhuma tarefa encontrada. Adicione sua primeira tarefa acima!</p>
+  }
+
+  @if (!isLoading() && items().length > 0) {
+    <table class="template-table">
+      <thead>
+        <tr>
+          <th>Ordem</th>
+          <th>Título</th>
+          <th>Descrição</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of items(); track item.id) {
+          <tr>
+            <td>{{ item.ordem }}</td>
+            <td>{{ item.tituloTarefa }}</td>
+            <td>{{ item.descricao || '---' }}</td>
+            <td>
+              <button class="btn-delete" (click)="onDeleteItem(item.id)">Deletar</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>

@@ -1,0 +1,29 @@
+<div class="dashboard-header">
+  <h1>Dashboard</h1>
+  <p>Visão geral dos seus processos de onboarding.</p>
+</div>
+
+@if (isLoading()) {
+  <div class="dashboard-content-placeholder">
+    <p>Carregando processos...</p>
+  </div>
+}
+
+@if (!isLoading() && processos().length === 0) {
+  <div class="dashboard-content-placeholder">
+    <p>Nenhum processo encontrado. Comece criando um template!</p>
+  </div>
+}
+
+@if (!isLoading() && processos().length > 0) {
+  <div class="processo-list">
+    @for (processo of processos(); track processo.id) {
+      <div class="processo-card">
+        <h3 class="processo-title">{{ processo.titulo }}</h3>
+        <span class="processo-status {{ processo.status.toLowerCase() }}">
+          {{ processo.status }}
+        </span>
+      </div>
+    }
+  </div>
+}

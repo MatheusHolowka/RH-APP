@@ -30,6 +30,8 @@
               }
             ],
             "styles": [
+              "node_modules/@coreui/coreui/dist/css/coreui.min.css",
+              "node_modules/@coreui/icons/css/free.min.css",
               "src/styles.scss"
             ]
           },
@@ -94,5 +96,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "90e40d26-7258-4ca2-b280-b68210ef3994"
   }
 }

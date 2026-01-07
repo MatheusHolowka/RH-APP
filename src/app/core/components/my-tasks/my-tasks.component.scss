@@ -1,0 +1,26 @@
+.dashboard-header {
+  margin-bottom: 2rem;
+  h1 { color: var(--black); }
+  p { color: var(--gray); }
+}
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.task-item {
+  background: var(--neu-1);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 5px 5px 10px var(--neu-2), -5px -5px 10px var(--white);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h3 { margin: 0 0 0.5rem 0; color: var(--black); font-size: 1.1rem;}
+  p { margin: 0; color: var(--gray); }
+  .process-tag { color: var(--purple); font-weight: bold; display: block; margin-bottom: 5px;}
+}
+button.btn-complete {
+  background: var(--purple); color: white; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; font-weight: bold;
+}

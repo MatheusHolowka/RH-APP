@@ -1,1 +1,330 @@
-/* You can add global styles to this file, and also import other style files */
+/* --- VARIÁVEIS GLOBAIS (Não mudam com o tema) --- */
+$transition: 1.25s;
+
+/* --- IMPORTS DO COREUI --- */
+
+/* * ========================================
+ * DEFINIÇÕES DE TEMA
+ * ========================================
+ */
+
+/* --- TEMA ESCURO (Agora usa o seletor do CoreUI) --- */
+[data-coreui-theme="dark"] {
+  --bg: #2c2f34;
+  --neu-1: #2c2f34; // Fundo principal
+  --neu-2: #25282c; // Sombra escura
+  --white: #33363b; // Sombra clara
+  --gray: #b0b8c0;   // Texto comum
+  --black: #ffffff; // Títulos
+  --purple: #4B70E2; // Botão
+}
+
+/* --- TEMA CLARO (Agora usa o seletor do CoreUI) --- */
+[data-coreui-theme="light"] {
+  --bg: #EDF2F0;
+  --neu-1: #ecf0f3;
+  --neu-2: #d1d9e6;
+  --white: #f9f9f9;
+  --gray: #6c757d;
+  --black: #181818;
+  --purple: #4B70E2;
+}
+
+/* * ========================================
+ * ESTILOS GERAIS DA APLICAÇÃO
+ * ========================================
+ */
+
+*, *::after, *::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  background-color: var(--neu-1);
+  color: var(--gray);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  // REMOVEMOS O DISPLAY:FLEX DAQUI
+}
+
+/* Centraliza o 'main' (só para a tela de login) */
+/* Aplicamos o flex ao host do login component */
+app-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+/* Centraliza o 'main' (só para a tela de login) */
+/* Usamos o seletor de componente do Angular */
+app-login body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main {
+  position: relative;
+  width: 1000px;
+  min-width: 1000px;
+  min-height: 600px;
+  height: 600px;
+  padding: 25px;
+  background-color: var(--neu-1);
+  box-shadow:
+    10px 10px 10px var(--neu-2),
+    -10px -10px 10px var(--white);
+  border-radius: 12px;
+  overflow: hidden;
+  @media(max-width: 1200px) { transform: scale(.7); }
+  @media(max-width: 1000px) { transform: scale(.6); }
+  @media(max-width: 800px) { transform: scale(.5); }
+  @media(max-width: 600px) { transform: scale(.4); }
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  width: 600px;
+  height: 100%;
+  padding: 25px;
+  background-color: var(--neu-1);
+  transition: $transition;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+
+  &__icon {
+    opacity: .5;
+    [data-coreui-theme="dark"] & {
+      filter: invert(1);
+    }
+  }
+  &__input {
+    width: 350px;
+    height: 40px;
+    margin: 4px 0;
+    padding-left: 25px;
+    font-size: 13px;
+    letter-spacing: .15px;
+    border: none;
+    outline: none;
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--neu-1);
+    color: var(--gray);
+    transition: .25s ease;
+    border-radius: 8px;
+    box-shadow:
+      inset 2px 2px 4px var(--neu-2),
+      inset -2px -2px 4px var(--white);
+
+    &:focus {
+      box-shadow:
+        inset 4px 4px 4px var(--neu-2),
+        inset -4px -4px 4px var(--white);
+    }
+    &::placeholder {
+      color: var(--gray);
+      opacity: 0.7;
+    }
+  }
+  &__span {
+    margin-top: 30px;
+    margin-bottom: 12px;
+    color: var(--gray);
+  }
+  &__link {
+    color: var(--black);
+    font-size: 15px;
+    margin-top: 25px;
+    border-bottom: 1px solid var(--gray);
+    line-height: 2;
+  }
+}
+
+.title {
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 3;
+  color: var(--black);
+}
+
+.description {
+  font-size: 14px;
+  letter-spacing: .25px;
+  text-align: center;
+  line-height: 1.6;
+  color: var(--gray);
+}
+
+.button {
+  width: 180px;
+  height: 50px;
+  border-radius: 25px;
+  margin-top: 50px;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1.15px;
+  background-color: var(--purple);
+  color: #ffffff;
+  box-shadow:
+    8px 8px 16px var(--neu-2),
+    -8px -8px 16px var(--white);
+  border: none;
+  outline: none;
+}
+/**/
+.a-container {
+  z-index: 100;
+  left: calc(100% - 600px);
+}
+.b-container {
+  left: calc(100% - 600px);
+  z-index: 0;
+}
+.switch {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 400px;
+  padding: 50px;
+  z-index: 200;
+  transition: $transition;
+  background-color: var(--neu-1); // <- MUDOU
+  overflow: hidden;
+  box-shadow:
+    4px 4px 10px var(--neu-2), // <- MUDOU
+    -4px -4px 10px var(--white); // <- MUDOU
+
+  &__circle {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background-color: var(--neu-1); // <- MUDOU
+    box-shadow:
+      inset 8px 8px 12px var(--neu-2), // <- MUDOU
+      inset -8px -8px 12px var(--white); // <- MUDOU
+    bottom: -60%;
+    left: -60%;
+    transition: $transition;
+
+    &--t {
+      top: -30%;
+      left: 60%;
+      width: 300px;
+      height: 300px;
+    }
+  }
+  &__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    width: 400px;
+    padding: 50px 55px;
+
+    .title { // Correção do 'tittle'
+      line-height: 1.4;
+      font-size: 30px;
+      white-space: nowrap;
+      margin-bottom: 15px;
+    }
+  }
+  &__button {
+    cursor: pointer;
+    &:hover {
+      box-shadow:
+        6px 6px 10px var(--neu-2), // <- MUDOU
+        -6px -6px 10px var(--white); // <- MUDOU
+      transform: scale(.985);
+      transition: .25s;
+    }
+    &:active,
+    &:focus {
+      box-shadow:
+        2px 2px 6px var(--neu-2), // <- MUDOU
+        -2px -2px 6px var(--white); // <- MUDOU
+      transform: scale(.97);
+      transition: .25s;
+    }
+  }
+}
+/**/
+.is-txr {
+  left: calc(100% - 400px);
+  transition: $transition;
+  transform-origin: left;
+}
+.is-txl {
+  left: 0;
+  transition: $transition;
+  transform-origin: right;
+}
+.is-z200 {
+  z-index: 200;
+  transition: $transition;
+}
+.is-hidden {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+}
+.is-gx {
+  animation: is-gx $transition;
+}
+@keyframes is-gx {
+  0%, 10%, 100% { width: 400px; }
+  30%, 50% { width: 500px; }
+}
+.error.api-error {
+  text-align: center;
+  width: 100%;
+  margin-top: 10px;
+  font-weight: bold;
+  color: red;
+  font-size: 14px;
+}
+app-main-layout {
+  display: flex !important;
+  width: 100%;
+  height: 100%;
+}
+
+/* O .wrapper (que contém o header e o conteúdo) */
+.wrapper {
+  margin-left: var(--cui-sidebar-width) !important;
+  transition: margin-left 0.3s ease-in-out;
+  flex-grow: 1;
+  min-width: 0; 
+}
+
+/* O CoreUI adiciona estas classes ao app-main-layout */
+app-main-layout.sidebar-narrow .wrapper {
+  margin-left: var(--cui-sidebar-narrow-width) !important;
+}
+
+app-main-layout.sidebar-hidden .wrapper {
+  margin-left: 0 !important;
+}

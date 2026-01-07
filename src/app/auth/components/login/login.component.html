@@ -1,0 +1,127 @@
+<div class="main" [class.is-gx]="isGx">
+  <div
+    class="container a-container"
+    id="a-container"
+    [class.is-txl]="isToggled"
+    [class.is-z200]="!isToggled"
+    [class.is-hidden]="isToggled"
+    >
+    <form
+      class="form"
+      id="a-form"
+      [formGroup]="registerForm"
+      (ngSubmit)="onRegister()"
+    >
+      <h2 class="form_title title">Crie sua Conta</h2>
+      <span class="form__span">use seu e-mail para registrar</span>
+
+      <input
+        class="form__input"
+        type="text"
+        placeholder="Nome da Empresa"
+        formControlName="nomeEmpresa"
+      />
+      <input
+        class="form__input"
+        type="text"
+        placeholder="Seu Nome"
+        formControlName="nome"
+      />
+      <input
+        class="form__input"
+        type="text"
+        placeholder="Email"
+        formControlName="email"
+      />
+      <input
+        class="form__input"
+        type="password"
+        placeholder="Senha"
+        formControlName="senha"
+      />
+      <button class="form__button button submit">CRIAR CONTA</button>
+
+      <div *ngIf="registerError" class="error api-error">
+        {{ registerError }}
+      </div>
+    </form>
+  </div>
+
+  <div
+    class="container b-container"
+    id="b-container"
+    [class.is-txl]="isToggled"
+    [class.is-z200]="isToggled"
+    [class.is-hidden]="!isToggled"
+    >
+    <form
+      class="form"
+      id="b-form"
+      [formGroup]="loginForm"
+      (ngSubmit)="onLogin()"
+    >
+      <h2 class="form_title title">Login</h2>
+      <span class="form__span">use seu e-mail</span>
+      <input
+        class="form__input"
+        type="text"
+        placeholder="Email"
+        formControlName="email"
+      />
+      <input
+        class="form__input"
+        type="password"
+        placeholder="Senha"
+        formControlName="senha"
+      />
+      <a class="form__link">Esqueceu sua senha?</a>
+      <button class="form__button button submit">LOGIN</button>
+
+      <div *ngIf="loginError" class="error api-error">
+        {{ loginError }}
+      </div>
+    </form>
+  </div>
+
+  <div class="switch" id="switch-cnt" [class.is-txr]="isToggled">
+    <div class="switch__circle"></div>
+    <div class="switch__circle switch__circle--t"></div>
+
+    <div
+      class="switch__container"
+      id="switch-c1"
+      [class.is-hidden]="isToggled"
+    >
+      <h2 class="switch__title title">Olá!</h2>
+      <p class="switch__description description">
+        Insira seus dados pessoais e comece sua jornada conosco
+      </p>
+      <button
+        class="switch__button button switch-btn"
+        (click)="changeForm()"
+        type="button"
+      >
+        CRIAR CONTA
+      </button>
+    </div>
+
+    <div
+      class="switch__container"
+      id="switch-c2"
+      [class.is-hidden]="!isToggled"
+    >
+      <h2 class="switch__title title">Bem-vindo de volta!</h2>
+      <p class="switch__description description">
+        Para se manter conectado, faça o login com suas informações pessoais
+      </p>
+      <button
+        class="switch__button button switch-btn"
+        (click)="changeForm()"
+        type="button"
+      >
+        LOGIN
+      </button>
+    </div>
+  </div>
+</div>
+<app-theme-toggle></app-theme-toggle>

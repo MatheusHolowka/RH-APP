@@ -1,0 +1,506 @@
+.dashboard-header {
+  margin-bottom: 2rem;
+  h1 {
+    color: var(--black);
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+  p {
+    color: var(--gray);
+    font-size: 1.2rem;
+  }
+}
+
+.card-neu {
+  padding: 2rem;
+  border-radius: 8px;
+  background-color: var(--neu-1);
+  box-shadow: 10px 10px 10px var(--neu-2), -10px -10px 10px var(--white);
+  color: var(--gray);
+  margin-bottom: 2rem;
+
+  h2 {
+    color: var(--black);
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    margin-top: 0;
+  }
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--gray);
+    font-weight: 600;
+  }
+
+  input,
+  select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: var(--neu-1);
+    color: var(--gray); // Texto do input
+    box-shadow: inset 2px 2px 4px var(--neu-2), inset -2px -2px 4px var(--white);
+    &:focus {
+      outline: none;
+      box-shadow: inset 4px 4px 4px var(--neu-2), inset -4px -4px 4px var(--white);
+    }
+  }
+}
+
+// Botão Principal (Roxo)
+button:not(.btn-delete):not(.btn-cancel):not(.btn-action) {
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 700;
+  background-color: var(--purple);
+  color: #fff;
+  box-shadow: 8px 8px 16px var(--neu-2), -8px -8px 16px var(--white);
+  border: none;
+  cursor: pointer;
+  margin-top: 1rem;
+
+  &:disabled {
+    background-color: var(--gray);
+    cursor: not-allowed;
+  }
+  &:hover:not(:disabled) {
+    transform: scale(0.98);
+  }
+}
+
+.api-error {
+  color: #e57373;
+  margin-bottom: 1rem;
+}
+
+// Tabela
+.template-table {
+  width: 100%;
+  border-collapse: collapse;
+  th,
+  td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--neu-2);
+    vertical-align: middle;
+  }
+  th {
+    color: var(--black);
+  }
+  td {
+    color: var(--gray);
+  }
+
+  .actions-cell {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  // Botão de Ação na Tabela
+  .btn-action {
+    background-color: var(--neu-1);
+    border: 1px solid var(--purple);
+    color: var(--purple);
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      background-color: var(--purple);
+      color: white;
+    }
+  }
+
+  .btn-delete {
+    background: none;
+    box-shadow: none;
+    border: none;
+    color: #e57373;
+    padding: 0;
+    margin: 0;
+    font-size: 0.9rem;
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    background-color: var(--neu-2);
+    color: var(--gray);
+
+    &.admin {
+      background-color: var(--purple);
+      color: white;
+    }
+  }
+}
+
+/* --- ESTILOS DO MODAL --- */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.75); // Fundo mais escuro para foco
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000; // Garante que fique acima do menu lateral
+  backdrop-filter: blur(4px); // Desfoque bonito no fundo
+}
+
+.modal-content {
+  width: 500px;
+  max-width: 90%;
+  background-color: var(--neu-1); // Usa a cor do tema
+  padding: 2rem;
+  border-radius: 12px;
+  // Sombra forte para destacar o modal do fundo
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--neu-2); // Borda sutil
+
+  h2 {
+    margin-top: 0;
+    color: var(--black);
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    color: var(--gray);
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  label {
+    display: block;
+    color: var(--black);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  select {
+    width: 100%;
+    padding: 1rem;
+    padding-right: 2.5rem; // Espaço para a seta
+    border-radius: 8px;
+    border: 1px solid transparent;
+
+    // Cores do Tema
+    background-color: var(--neu-2);
+    color: var(--gray);
+    font-size: 1rem;
+    font-family: inherit; // Mantém a fonte do site
+
+    // TRUQUE: Remove a seta feia padrão do navegador
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    // Adiciona nossa própria seta (ícone chevron) via SVG no background
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23b0b8c0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1.2em;
+
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: 2rem;
+
+    &:focus {
+      outline: none;
+      border-color: var(--purple);
+      // Sombra interna suave ao focar
+      box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2),
+        inset -2px -2px 5px rgba(255, 255, 255, 0.05);
+      color: var(--black); // Texto fica mais claro ao focar
+    }
+
+    // Estiliza as opções (funciona na maioria dos navegadores modernos)
+    option {
+      background-color: var(--neu-1); // Fundo escuro para a lista
+      color: var(--gray);
+      padding: 10px;
+    }
+  }
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end; // Alinha botões à direita
+  gap: 1rem; // Espaço entre os botões
+  margin-top: auto;
+
+  // Reseta estilos genéricos de botão para ter controle total aqui
+  button {
+    margin: 0 !important;
+    padding: 0.8rem 2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    height: auto;
+
+    // Botão Principal (Iniciar)
+    &:not(.btn-cancel) {
+      background-color: var(--purple);
+      color: white;
+      border: none;
+      box-shadow: 0 4px 15px rgba(75, 112, 226, 0.4);
+
+      &:hover:not(:disabled) {
+        transform: translateY(-2px);
+        filter: brightness(1.1);
+      }
+
+      &:disabled {
+        background-color: var(--neu-2);
+        color: var(--gray);
+        cursor: not-allowed;
+        box-shadow: none;
+      }
+    }
+  }
+
+  // Botão Cancelar (Estilo Outline)
+  .btn-cancel {
+    background-color: transparent;
+    border: 1px solid var(--gray);
+    color: var(--gray);
+    box-shadow: none;
+
+    &:hover {
+      border-color: var(--black);
+      color: var(--black);
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+  }
+}
+.custom-select-container {
+  position: relative; // Para a lista absoluta funcionar
+  width: 100%;
+  margin-bottom: 2rem;
+  user-select: none;
+}
+
+.select-trigger {
+  width: 100%;
+  padding: 1rem;
+  padding-right: 2.5rem;
+  border-radius: 8px;
+  background-color: var(--neu-2); // Fundo do input
+  color: var(--gray);
+  font-size: 1rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s;
+
+  // Seta girando
+  .arrow {
+    width: 1.2em;
+    height: 1.2em;
+    transition: transform 0.3s;
+    stroke: var(--gray);
+  }
+
+  // Estado Ativo (Aberto)
+  &.active {
+    border-color: var(--purple);
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2);
+    color: var(--black);
+
+    .arrow {
+      transform: rotate(180deg); // Gira a seta
+      stroke: var(--purple);
+    }
+  }
+}
+
+.select-options {
+  position: absolute;
+  top: 110%; // Logo abaixo do trigger
+  left: 0;
+  width: 100%;
+  background-color: var(--neu-1); // Fundo da lista
+  border-radius: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  z-index: 100; // Fica acima de tudo no modal
+  border: 1px solid var(--neu-2);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); // Sombra flutuante
+  max-height: 200px;
+  overflow-y: auto; // Scroll se tiver muitos itens
+
+  // Animação suave de entrada
+  animation: slideDown 0.2s ease-out;
+
+  .option {
+    padding: 0.8rem 1rem;
+    cursor: pointer;
+    color: var(--gray);
+    transition: background 0.2s;
+    border-bottom: 1px solid var(--neu-2);
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    // Hover bonito (sem aquele azul feio do navegador)
+    &:hover:not(.disabled) {
+      background-color: var(--neu-2);
+      color: var(--purple);
+      padding-left: 1.5rem; // Efeito de deslocamento suave
+    }
+
+    &.selected {
+      background-color: var(--purple);
+      color: white;
+    }
+
+    &.disabled {
+      color: rgba(255, 255, 255, 0.2);
+      cursor: default;
+    }
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.custom-select-container {
+  position: relative; // Para a lista absoluta funcionar
+  width: 100%;
+  margin-bottom: 2rem;
+  user-select: none;
+}
+
+.select-trigger {
+  width: 100%;
+  padding: 1rem;
+  padding-right: 2.5rem;
+  border-radius: 8px;
+  background-color: var(--neu-2); // Fundo do input
+  color: var(--gray);
+  font-size: 1rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s;
+
+  // Seta girando
+  .arrow {
+    width: 1.2em;
+    height: 1.2em;
+    transition: transform 0.3s;
+    stroke: var(--gray);
+  }
+
+  // Estado Ativo (Aberto)
+  &.active {
+    border-color: var(--purple);
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2);
+    color: var(--black);
+
+    .arrow {
+      transform: rotate(180deg); // Gira a seta
+      stroke: var(--purple);
+    }
+  }
+}
+
+.select-options {
+  position: absolute;
+  top: 110%; // Logo abaixo do trigger
+  left: 0;
+  width: 100%;
+  background-color: var(--neu-1); // Fundo da lista
+  border-radius: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  z-index: 100; // Fica acima de tudo no modal
+  border: 1px solid var(--neu-2);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); // Sombra flutuante
+  max-height: 200px;
+  overflow-y: auto; // Scroll se tiver muitos itens
+
+  // Animação suave de entrada
+  animation: slideDown 0.2s ease-out;
+
+  .option {
+    padding: 0.8rem 1rem;
+    cursor: pointer;
+    color: var(--gray);
+    transition: background 0.2s;
+    border-bottom: 1px solid var(--neu-2);
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    // Hover bonito (sem aquele azul feio do navegador)
+    &:hover:not(.disabled) {
+      background-color: var(--neu-2);
+      color: var(--purple);
+      padding-left: 1.5rem; // Efeito de deslocamento suave
+    }
+
+    &.selected {
+      background-color: var(--purple);
+      color: white;
+    }
+
+    &.disabled {
+      color: rgba(255, 255, 255, 0.2);
+      cursor: default;
+    }
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

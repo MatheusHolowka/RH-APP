@@ -1,0 +1,25 @@
+<div class="dashboard-header">
+  <h1>Minhas Tarefas</h1>
+  <p>O que você precisa fazer hoje.</p>
+</div>
+
+<div class="card-neu">
+  @if (isLoading()) { <p>Carregando...</p> }
+  
+  @if (!isLoading() && tasks().length === 0) {
+    <p>Você não tem tarefas pendentes. Bom trabalho! 🎉</p>
+  }
+
+  <div class="task-list">
+    @for (task of tasks(); track task.id) {
+      <div class="task-item">
+        <div class="task-info">
+          <small class="process-tag">{{ task.processo.titulo }}</small>
+          <h3>{{ task.tituloTarefa }}</h3>
+          <p>{{ task.descricao || 'Sem descrição' }}</p>
+        </div>
+        <button class="btn-complete" (click)="completeTask(task.id)">Concluir</button>
+      </div>
+    }
+  </div>
+</div>
